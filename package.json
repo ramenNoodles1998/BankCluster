@@ -1,0 +1,22 @@
+{
+  "name": "bankcluster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bankCluster.js",
+  "scripts": {
+    "test": "node bankCluster.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramenNoodles1998/BankCluster.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramenNoodles1998/BankCluster/issues"
+  },
+  "homepage": "https://github.com/ramenNoodles1998/BankCluster#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  }
+}
