@@ -5,4 +5,4 @@ A command line application that cracks passwords as fast as possible utilizing a
 Start with running
 ```npm i```
 Then run 
-```node diskhog```
+```node bankCluster.js```
