@@ -7,7 +7,7 @@ let data = []
 let hashes = []
 const charSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-data.push(fs.readFileSync('password.txt', 'utf-8').split('\n'))
+data.push(fs.readFileSync('passwords.txt', 'utf-8').split('\n'))
 hashes.push(fs.readFileSync('test.hash','utf-8').split('\r\n'))
 
 passwords = data.flat(Infinity).flat(1)
