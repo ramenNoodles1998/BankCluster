@@ -33,6 +33,7 @@ async function passwordGenerator(len, localHashes) {
         for(let f of found) {
             localHashes.splice(localHashes.indexOf(f), 1)
         }
+
         found = []
     }
 
@@ -72,7 +73,7 @@ if(cluster.isMaster) {
     const worker = cluster.fork()
     let msg = {id: i, hashesWorker: []}
 
-    for(let j = msg.id; j < hashes.length; j += numCPUs) {
+    for(let j = i; j < hashes.length; j += numCPUs) {
         msg.hashesWorker.push(hashes[j])
     }
 
@@ -83,17 +84,12 @@ if(cluster.isMaster) {
     process.on('message',  async (message) => {
         console.time(`worker${message.id}`)
 
-        let found = await passwordGenerator(1, message.hashesWorker)
+        let promiseArray = []
 
-        //to shorten search list
-        for(let f of found) {
-            message.hashesWorker.splice(message.hashesWorker.indexOf(f), 1)
-        }
+        promiseArray.push(passwordGenerator(1, message.hashesWorker))
+        promiseArray.push(passwordChecker(message.hashesWorker))
 
-        found = []
-
-        found = await passwordChecker(message.hashesWorker)
-
+        let found = await Promise.all(promiseArray)
         //to shorten search list
         for(let f of found) {
             message.hashesWorker.splice(message.hashesWorker.indexOf(f), 1)
